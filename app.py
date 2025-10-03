@@ -9,6 +9,9 @@ COSMOS_API_BASE_URL = os.environ.get('COSMOS_API_BASE_URL', 'https://cosmosdb-ap
 
 def get_customer_data_from_cosmos(customer_id):
     """Fetch customer data from Cosmos DB using REST API"""
+    print(f"\n🔍 STARTING API CALL for customer: {customer_id}")
+    print(f"🌐 API URL: {COSMOS_API_BASE_URL}/logs/{customer_id}")
+    
     try:
         # Make API call to your Cosmos DB service
         api_url = f"{COSMOS_API_BASE_URL}/logs/{customer_id}"
@@ -18,22 +21,25 @@ def get_customer_data_from_cosmos(customer_id):
             'Accept': 'application/json'
         }
         
+        print(f"⏳ Making HTTP GET request...")
         response = requests.get(api_url, headers=headers, timeout=30)
         
         if response.status_code == 200:
+            print(f"✅ SUCCESS: External Cosmos API returned data for {customer_id}")
+            print(f"📊 Response size: {len(response.text)} characters")
             return response.json()
         elif response.status_code == 404:
-            print(f"No data found for customer {customer_id}")
+            print(f"❌ NOT FOUND: No data found for customer {customer_id} in external API")
             return None
         else:
-            print(f"API request failed with status {response.status_code}: {response.text}")
+            print(f"❌ API ERROR: Request failed with status {response.status_code}: {response.text}")
             return None
             
     except requests.exceptions.RequestException as e:
-        print(f"Error calling Cosmos DB API: {e}")
+        print(f"🚨 NETWORK ERROR calling Cosmos DB API: {e}")
         return None
     except Exception as e:
-        print(f"Unexpected error: {e}")
+        print(f"🚨 UNEXPECTED ERROR: {e}")
         return None
 
 app = Flask(__name__)
@@ -229,23 +235,31 @@ def get_application(application_id):
 @app.route('/api/cosmos-data/<customer_id>')
 def get_cosmos_data(customer_id):
     """Fetch customer data from Cosmos DB"""
+    print(f"\n🎯 FLASK ROUTE CALLED: /api/cosmos-data/{customer_id}")
+    
     try:
         # Try to get real data from Cosmos DB
         cosmos_data = get_customer_data_from_cosmos(customer_id)
         
         if cosmos_data and len(cosmos_data) > 0:
+            print(f"✅ RETURNING REAL COSMOS DATA for {customer_id}")
+            print(f"📊 Data records: {len(cosmos_data)}")
             return jsonify({
                 'success': True,
                 'data': cosmos_data,
-                'source': 'cosmos'
+                'source': 'cosmos',
+                'message': f'Real data from external Cosmos API - {len(cosmos_data)} records'
             })
         else:
             # Return mock data if no cosmos data found
+            print(f"🔄 EXTERNAL API FAILED - RETURNING MOCK DATA for {customer_id}")
             mock_data = get_mock_cosmos_data(customer_id)
+            print(f"📊 Mock data records: {len(mock_data)}")
             return jsonify({
                 'success': True,
                 'data': mock_data,
-                'source': 'mock'
+                'source': 'mock',
+                'message': f'Fallback mock data - {len(mock_data)} records'
             })
     
     except Exception as e:

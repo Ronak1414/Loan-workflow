@@ -456,18 +456,11 @@ function updateCountBadges() {
     document.getElementById('reviewedCount').textContent = applicationsData.reviewed.length;
 }
 
-// Cosmos DB Configuration
-const COSMOS_CONFIG = {
-    endpoint: "https://loan-db.documents.azure.com:443/",
-    key: "jQVVlMhWnCK3VRZDY5B8bUSnPAd0hxL6Y2cUCk05KK3OBN6onHA3ZKtlbCEmuLhOoECTo8OCu750ACDbNM9yxg==",
-    databaseId: "LoanAssistDB",
-    containerId: "AgentLogs"
-};
-
 // Fetch real-time data from Cosmos DB via Flask API
 async function fetchCosmosData(customerId) {
     try {
-        console.log(`Fetching Cosmos data for customer: ${customerId}`);
+        console.log(`\n🔍 JAVASCRIPT: Starting data fetch for customer: ${customerId}`);
+        console.log(`🌐 JAVASCRIPT: Calling Flask API endpoint: /api/cosmos-data/${customerId}`);
         
         // Call Flask API endpoint for Cosmos data
         const response = await fetch(`/api/cosmos-data/${customerId}`);
@@ -477,19 +470,30 @@ async function fetchCosmosData(customerId) {
         }
         
         const result = await response.json();
+        console.log(`📡 JAVASCRIPT: Flask API Response:`, result);
         
         if (result.success) {
-            console.log(`Cosmos data fetched successfully from ${result.source}:`, result.data);
+            if (result.source === 'cosmos') {
+                console.log(`✅ JAVASCRIPT: REAL COSMOS API DATA RECEIVED for ${customerId}`);
+                console.log(`📊 JAVASCRIPT: ${result.message}`);
+                console.log(`🎯 JAVASCRIPT: Data source: EXTERNAL COSMOS DB API`);
+            } else {
+                console.log(`🔄 JAVASCRIPT: MOCK FALLBACK DATA RECEIVED for ${customerId}`);
+                console.log(`📊 JAVASCRIPT: ${result.message}`);
+                console.log(`🎯 JAVASCRIPT: Data source: MOCK DATA (External API failed)`);
+            }
+            console.log(`📋 JAVASCRIPT: Full data:`, result.data);
             return result.data;
         } else {
             throw new Error('Failed to fetch cosmos data');
         }
         
     } catch (error) {
-        console.error('Error fetching Cosmos data:', error);
+        console.error('🚨 JAVASCRIPT: Error fetching Cosmos data:', error);
         
         // Fallback: Return mock data structure matching Cosmos format
-        console.log('Falling back to mock data');
+        console.log('🔄 JAVASCRIPT: FALLING BACK TO CLIENT-SIDE MOCK DATA');
+        console.log('🎯 JAVASCRIPT: Data source: CLIENT-SIDE MOCK (Network/API error)');
         return getMockCosmosData(customerId);
     }
 }
