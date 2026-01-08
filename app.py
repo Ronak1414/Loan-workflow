@@ -217,6 +217,83 @@ def workflow_html():
     """Workflow page with .html extension for compatibility"""
     return render_template('workflow-new.html')
 
+@app.route('/process-application')
+def process_application_page():
+    """Process application page with Documents, Workflow, and Analysis tabs"""
+    return render_template('process-application.html')
+
+@app.route('/api/documents')
+def get_documents():
+    """Get list of documents from Documents folder with categories"""
+    documents_folder = os.path.join(os.path.dirname(__file__), 'Documents')
+    documents = []
+    
+    # Document categorization mapping - keyword: (category, official_name, status)
+    doc_categories = {
+        'adhaar': ('kyc', 'Aadhaar Card', 'verified'),
+        'aadhar': ('kyc', 'Aadhaar Card', 'verified'),
+        'pan': ('kyc', 'PAN Card', 'verified'),
+        'passport': ('kyc', 'Passport', 'verified'),
+        'cibil': ('financial', 'CIBIL Score Report', 'verified'),
+        'pay slip': ('financial', 'Salary Pay Slip', 'verified'),
+        'payslip': ('financial', 'Salary Pay Slip', 'verified'),
+        'pay': ('financial', 'Salary Pay Slip', 'verified'),
+        'slip': ('financial', 'Salary Pay Slip', 'verified'),
+        'bank': ('financial', 'Bank Account Statement', 'pending'),
+        'transaction': ('financial', 'Bank Account Statement', 'pending'),
+        'property': ('property', 'Property Registration Document', 'pending'),
+        'collateral': ('property', 'Collateral Document', 'pending'),
+    }
+    
+    if os.path.exists(documents_folder):
+        for filename in os.listdir(documents_folder):
+            file_path = os.path.join(documents_folder, filename)
+            if os.path.isfile(file_path):
+                # Determine file type
+                ext = filename.lower().split('.')[-1]
+                if ext in ['png', 'jpg', 'jpeg', 'gif']:
+                    file_type = 'image'
+                elif ext == 'pdf':
+                    file_type = 'pdf'
+                else:
+                    file_type = 'document'
+                
+                # Determine category and official name
+                filename_lower = filename.lower()
+                category = 'kyc'
+                official_name = filename.replace('-', ' ').replace('_', ' ').rsplit('.', 1)[0]
+                status = 'verified'
+                
+                # Check each keyword for categorization
+                for keyword, (cat, name, stat) in doc_categories.items():
+                    if keyword in filename_lower:
+                        category = cat
+                        official_name = name
+                        status = stat
+                        break
+                
+                documents.append({
+                    'filename': filename,
+                    'name': official_name,
+                    'type': file_type,
+                    'category': category,
+                    'status': status,
+                    'url': f'/Documents/{filename}'
+                })
+    
+    # Sort documents: by category order, then by name
+    category_order = {'kyc': 0, 'financial': 1, 'property': 2}
+    documents.sort(key=lambda x: (category_order.get(x['category'], 3), x['name']))
+    
+    return jsonify({'documents': documents})
+
+@app.route('/Documents/<path:filename>')
+def serve_document(filename):
+    """Serve documents from the Documents folder"""
+    documents_folder = os.path.join(os.path.dirname(__file__), 'Documents')
+    from flask import send_from_directory
+    return send_from_directory(documents_folder, filename)
+
 @app.route('/api/applications')
 def get_applications():
     """Get all applications data"""

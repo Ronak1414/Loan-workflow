@@ -6,12 +6,12 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
     min-height: 100vh;
     overflow-x: auto;
     position: relative;
-    color: #f8fafc;
+    color: #1e293b;
 }
 
 body::before {
@@ -21,20 +21,16 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+    background: transparent;
     z-index: -1;
 }
 
 /* Header Styles */
 .header {
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(20px);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     padding: 1rem 2rem;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -56,8 +52,8 @@ body::before {
 
 .logo-icon {
     font-size: 2.5rem;
-    color: #3b82f6;
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    color: #ffffff;
+    text-shadow: none;
 }
 
 .brand-text {
@@ -68,13 +64,13 @@ body::before {
 .brand-name {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: #ffffff;
     line-height: 1.2;
 }
 
 .brand-subtitle {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: #e0e7ff;
     font-weight: 400;
 }
 
@@ -85,25 +81,25 @@ body::before {
 }
 
 .nav-btn {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: rgba(255, 255, 255, 0.2);
     color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    font-size: 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+    gap: 0.4rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn:hover {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Main Content */
@@ -121,7 +117,7 @@ body::before {
 .page-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: #1e293b;
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
@@ -130,13 +126,13 @@ body::before {
 }
 
 .page-title i {
-    color: #3b82f6;
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    color: #2563eb;
+    text-shadow: none;
 }
 
 .page-subtitle {
     font-size: 1.125rem;
-    color: #94a3b8;
+    color: #64748b;
     font-weight: 300;
 }
 
@@ -149,12 +145,11 @@ body::before {
 }
 
 .applications-column {
-    background: rgba(30, 41, 59, 0.4);
-    backdrop-filter: blur(20px);
+    background: #ffffff;
     border-radius: 1rem;
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    border: 1px solid #e2e8f0;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .column-header {
@@ -162,22 +157,23 @@ body::before {
     display: flex;
     align-items: center;
     gap: 1rem;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    border-bottom: 1px solid #e2e8f0;
     position: relative;
 }
 
 .column-header.pending {
-    background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(245, 101, 101, 0.1));
+    background: #fef3c7;
 }
 
 .column-header.reviewed {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.1));
+    background: #d1fae5;
 }
 
 .column-header h2 {
     font-size: 1.25rem;
     font-weight: 600;
     flex: 1;
+    color: #1e293b;
 }
 
 .column-header i {
@@ -193,13 +189,13 @@ body::before {
 }
 
 .count-badge {
-    background: rgba(59, 130, 246, 0.2);
-    color: #3b82f6;
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
     font-size: 0.875rem;
     font-weight: 600;
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(37, 99, 235, 0.2);
 }
 
 .applications-list {
@@ -210,11 +206,11 @@ body::before {
 
 /* Application Card */
 .application-card {
-    background: rgba(51, 65, 85, 0.3);
+    background: #f8fafc;
     border-radius: 0.75rem;
     padding: 1.5rem;
     margin-bottom: 1rem;
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    border: 1px solid #e2e8f0;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -222,10 +218,10 @@ body::before {
 }
 
 .application-card:hover {
-    background: rgba(51, 65, 85, 0.5);
+    background: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
 }
 
 .application-card::before {
@@ -235,7 +231,7 @@ body::before {
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom, #3b82f6, #2563eb);
+    background: linear-gradient(to bottom, #2563eb, #1d4ed8);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -254,7 +250,7 @@ body::before {
 .application-id {
     font-size: 1.125rem;
     font-weight: 600;
-    color: #3b82f6;
+    color: #2563eb;
 }
 
 .application-status {
@@ -294,7 +290,7 @@ body::before {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    color: #cbd5e1;
+    color: #64748b;
     font-size: 0.875rem;
 }
 
@@ -305,18 +301,18 @@ body::before {
 }
 
 .info-item i {
-    color: #64748b;
+    color: #94a3b8;
     width: 1rem;
 }
 
 .card-footer {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    border-top: 1px solid #e2e8f0;
     display: flex;
     justify-content: between;
     align-items: center;
-    color: #94a3b8;
+    color: #64748b;
     font-size: 0.75rem;
 }
 
@@ -359,11 +355,10 @@ body::before {
 }
 
 .modal {
-    background: rgba(30, 41, 59, 0.95);
-    backdrop-filter: blur(20px);
+    background: #ffffff;
     border-radius: 1rem;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     width: 90%;
     max-width: 600px;
     max-height: 80vh;
@@ -384,7 +379,7 @@ body::before {
 
 .modal-header {
     padding: 1.5rem;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    border-bottom: 1px solid #e2e8f0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -393,13 +388,13 @@ body::before {
 .modal-header h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #f8fafc;
+    color: #1e293b;
 }
 
 .close-btn {
     background: none;
     border: none;
-    color: #94a3b8;
+    color: #64748b;
     font-size: 1.25rem;
     cursor: pointer;
     padding: 0.5rem;
@@ -408,8 +403,8 @@ body::before {
 }
 
 .close-btn:hover {
-    background: rgba(148, 163, 184, 0.1);
-    color: #f8fafc;
+    background: #f1f5f9;
+    color: #1e293b;
 }
 
 .modal-content {
@@ -420,7 +415,7 @@ body::before {
 
 .modal-actions {
     padding: 1.5rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.2);
+    border-top: 1px solid #e2e8f0;
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
@@ -440,26 +435,26 @@ body::before {
 }
 
 .btn-secondary {
-    background: rgba(71, 85, 105, 0.3);
-    color: #cbd5e1;
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
 }
 
 .btn-secondary:hover {
-    background: rgba(71, 85, 105, 0.5);
-    color: #f8fafc;
+    background: #e2e8f0;
+    color: #1e293b;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
     color: white;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
 }
 
 /* Application Details in Modal */
@@ -469,14 +464,14 @@ body::before {
 }
 
 .detail-section {
-    background: rgba(51, 65, 85, 0.3);
+    background: #f8fafc;
     border-radius: 0.75rem;
     padding: 1.5rem;
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    border: 1px solid #e2e8f0;
 }
 
 .detail-section h4 {
-    color: #3b82f6;
+    color: #2563eb;
     margin-bottom: 1rem;
     font-size: 1rem;
     font-weight: 600;
@@ -499,14 +494,14 @@ body::before {
 
 .detail-label {
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.025em;
 }
 
 .detail-value {
     font-size: 0.875rem;
-    color: #f8fafc;
+    color: #1e293b;
     font-weight: 500;
 }
 
@@ -540,19 +535,19 @@ body::before {
 
 .applications-list::-webkit-scrollbar-track,
 .modal-content::-webkit-scrollbar-track {
-    background: rgba(51, 65, 85, 0.3);
+    background: #f1f5f9;
     border-radius: 3px;
 }
 
 .applications-list::-webkit-scrollbar-thumb,
 .modal-content::-webkit-scrollbar-thumb {
-    background: rgba(59, 130, 246, 0.5);
+    background: #cbd5e1;
     border-radius: 3px;
 }
 
 .applications-list::-webkit-scrollbar-thumb:hover,
 .modal-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(59, 130, 246, 0.7);
+    background: #94a3b8;
 }
 
 /* Loading Animation */

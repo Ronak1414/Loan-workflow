@@ -405,13 +405,16 @@ function createApplicationDetails(app) {
     `;
 }
 
-// Process application - redirect to workflow with application ID
+// Process application - redirect to process application page with tabs
 async function processApplication() {
     if (selectedApplication) {
+        // Store application data in session storage for the process page
+        sessionStorage.setItem('selectedApplication', JSON.stringify(selectedApplication));
+        
         // Check if this application needs Cosmos DB data
         if (selectedApplication.isCosmosData) {
             try {
-                showLoadingIndicator('Fetching the agents....');
+                showLoadingIndicator('Fetching application data...');
                 
                 // Fetch data from Cosmos DB and store in localStorage
                 const cosmosData = await fetchCosmosData(selectedApplication.id);
@@ -419,18 +422,18 @@ async function processApplication() {
                 
                 hideLoadingIndicator();
                 
-                // Redirect to workflow with cosmos data flag
-                window.location.href = `workflow-new.html?applicationId=${selectedApplication.id}&cosmosData=true`;
+                // Redirect to process application page
+                window.location.href = `/process-application?id=${selectedApplication.id}&cosmosData=true`;
             } catch (error) {
                 console.error('Error fetching Cosmos data:', error);
                 hideLoadingIndicator();
                 
-                // Continue with normal workflow even if Cosmos fails
-                window.location.href = `workflow-new.html?applicationId=${selectedApplication.id}`;
+                // Continue with process page even if Cosmos fails
+                window.location.href = `/process-application?id=${selectedApplication.id}`;
             }
         } else {
-            // Normal workflow for other applications
-            window.location.href = `workflow-new.html?applicationId=${selectedApplication.id}`;
+            // Redirect to process application page
+            window.location.href = `/process-application?id=${selectedApplication.id}`;
         }
     }
 }
@@ -644,10 +647,10 @@ function getMockCosmosData(customerId) {
             "agent_name": "DocumentChecker Agent",
             "customer_id": "CUST0241",
             "agent_description": [
-                "Initiated KYC verification using Aadhar (XXXX XXXX 4534), PAN (XXXXXXX1X), and DOB (XX/XX/19XX).",
+                "Initiated KYC verification using Aadhar (XXXX XXXX 4534), PAN (CHQXXXXXX), and DOB (XX/XX/19XX).",
                 "Verified document set:",
-                "Aadhar (ABXXXX)",
-                "PAN(FHXXX)",
+                "Aadhar (XXXX XXXX 4534)",
+                "PAN(CHQXXXXXX)",
                 "salary slips",
                 "income certificate",
                 "land records",
