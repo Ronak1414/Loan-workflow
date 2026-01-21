@@ -22,7 +22,6 @@
 - [Overview](#-overview)
 - [Features](#-features)
 - [Architecture](#-architecture)
-- [Screenshots](#-screenshots)
 - [Quick Start](#-quick-start)
 - [API Reference](#-api-reference)
 - [Project Structure](#-project-structure)
@@ -111,6 +110,7 @@
           ▼                 ▼                     ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                 🤖 AI AGENTS (Azure AI Foundry)                 │
+│                                                                 │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
 │  │ Application  │  │  Document    │  │       Audit          │  │
 │  │ Assist Agent │  │Checker Agent │  │       Agent          │  │
@@ -119,24 +119,20 @@
 │  │   details    │  │ • Check docs │  │ • Track processing   │  │
 │  │ • Validate   │  │ • Assess risk│  │ • Generate audit     │  │
 │  └──────────────┘  └──────────────┘  └──────────────────────┘  │
+│                                                                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │   Credit     │  │    Risk      │  │    Underwriting      │  │
+│  │ Score Agent  │  │Evaluator Agent│  │       Agent          │  │
+│  │              │  │              │  │                      │  │
+│  │ • CIBIL check│  │ • Risk score │  │ • Final decision     │  │
+│  │ • Score calc │  │ • Flag issues│  │ • Loan terms         │  │
+│  │ • Eligibility│  │ • Compliance │  │ • Approval/Reject    │  │
+│  └──────────────┘  └──────────────┘  └──────────────────────┘  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
-
-## 🖼️ Screenshots
-
-### Applications Dashboard
-> View pending and reviewed applications in a clean, organized interface
-
-### Workflow Processing
-> Watch AI agents process applications through verification stages
-
-### Document Review
-> Review submitted KYC, financial, and property documents
-
----
-
 ## 🚀 Quick Start
 
 ### Prerequisites
